@@ -1,7 +1,9 @@
 ---
 import { heroSlides } from '../../config/content';
+import { bookingUrl } from '../../config/site';
 import Button from '../ui/Button.astro';
 import T from '../ui/T.astro';
+const bookExt = bookingUrl.startsWith('http');
 ---
 <section id="hero" class="hero" aria-label="Featured" aria-roledescription="carousel">
   <div class="hero__slides">
@@ -21,7 +23,7 @@ import T from '../ui/T.astro';
           <h1 class="hero__title"><T vi={s.title.vi} en={s.title.en} br /></h1>
           <p class="hero__desc"><T vi={s.desc.vi} en={s.desc.en} /></p>
           <div class="hero__cta">
-            <Button href="#contact" variant="primary" size="lg"><T vi="Đặt lịch ngay" en="Book now" /></Button>
+            <Button href={bookingUrl} target={bookExt ? '_blank' : undefined} rel={bookExt ? 'noopener' : undefined} variant="primary" size="lg"><T vi="Đặt lịch ngay" en="Book now" /></Button>
             <Button href="#about" variant="outline" size="lg"><T vi="Xem chi tiết" en="Learn more" /></Button>
           </div>
         </div>

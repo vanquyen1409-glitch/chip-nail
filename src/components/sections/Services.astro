@@ -1,9 +1,10 @@
 ---
 import { serviceGroups, serviceNote } from '../../config/content';
-import { contact } from '../../config/site';
+import { contact, bookingUrl } from '../../config/site';
 import SectionTitle from '../ui/SectionTitle.astro';
 import Button from '../ui/Button.astro';
 import T from '../ui/T.astro';
+const bookExt = bookingUrl.startsWith('http');
 ---
 <section id="services" class="services section">
   <div class="container">
@@ -39,7 +40,7 @@ import T from '../ui/T.astro';
         <a href={`tel:${contact.phoneTel}`}>{contact.phoneLabel}</a>
         <T vi="để được tư vấn." en="for a consultation." />
       </p>
-      <Button href="#contact" variant="primary" size="lg"><T vi="Đặt lịch ngay" en="Book now" /></Button>
+      <Button href={bookingUrl} target={bookExt ? '_blank' : undefined} rel={bookExt ? 'noopener' : undefined} variant="primary" size="lg"><T vi="Đặt lịch ngay" en="Book now" /></Button>
     </div>
   </div>
 </section>

@@ -39,6 +39,13 @@ export const socials = {
   tiktok: '#',
 };
 
+/**
+ * Link ĐẶT LỊCH ONLINE. Dán link công khai từ Square/Booksy/Fresha vào đây
+ * (vd 'https://book.squareup.com/...'). Để '#contact' nếu chưa có -> nút sẽ
+ * cuộn xuống phần Liên hệ. Khi có link thật, mọi nút "Book now" tự mở trang đặt lịch.
+ */
+export const bookingUrl = '#contact';
+
 export const nav = [
   { label: { vi: 'Trang chủ', en: 'Home' }, href: '#hero' },
   { label: { vi: 'Giới thiệu', en: 'About' }, href: '#about' },

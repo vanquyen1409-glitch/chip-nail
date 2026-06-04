@@ -1,8 +1,9 @@
 ---
-import { site, nav, contact } from '../../config/site';
+import { site, nav, contact, bookingUrl } from '../../config/site';
 import ThemeToggle from './ThemeToggle.astro';
 import Button from '../ui/Button.astro';
 import T from '../ui/T.astro';
+const bookExt = bookingUrl.startsWith('http');
 ---
 <header class="header" id="site-header">
   <div class="container header__inner">
@@ -26,7 +27,7 @@ import T from '../ui/T.astro';
 
     <div class="header__actions">
       <ThemeToggle />
-      <Button href="#contact" variant="primary" class="header__cta"><T vi="Đặt lịch" en="Book now" /></Button>
+      <Button href={bookingUrl} target={bookExt ? '_blank' : undefined} rel={bookExt ? 'noopener' : undefined} variant="primary" class="header__cta"><T vi="Đặt lịch" en="Book now" /></Button>
       <button
         id="menu-open"
         class="hamburger"
@@ -58,7 +59,7 @@ import T from '../ui/T.astro';
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.37 2.3.57 3.5.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.57 3.5a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
         {contact.phoneLabel}
       </a>
-      <Button href="#contact" variant="primary" size="lg" class="m-cta" data-close><T vi="Đặt lịch ngay" en="Book now" /></Button>
+      <Button href={bookingUrl} target={bookExt ? '_blank' : undefined} rel={bookExt ? 'noopener' : undefined} variant="primary" size="lg" class="m-cta" data-close><T vi="Đặt lịch ngay" en="Book now" /></Button>
     </div>
     <button class="mobile-menu__backdrop" id="menu-backdrop" aria-label="Close menu" tabindex="-1"></button>
   </div>
