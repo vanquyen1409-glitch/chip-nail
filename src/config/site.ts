@@ -24,8 +24,9 @@ export const contact = {
   address: '831 Lamont Drive, Lincoln, NE',
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=831+Lamont+Drive+Lincoln+NE',
   hours: [
-    { days: { vi: 'Thứ 2 – Thứ 6', en: 'Mon – Fri' }, time: '09:00 – 20:00' },
-    { days: { vi: 'Thứ 7 – Chủ nhật', en: 'Sat – Sun' }, time: '08:30 – 21:00' },
+    { days: { vi: 'Thứ 2 – Thứ 6', en: 'Mon – Fri' }, time: '9:30 AM – 7:30 PM' },
+    { days: { vi: 'Thứ 7', en: 'Saturday' }, time: '9:30 AM – 6:00 PM' },
+    { days: { vi: 'Chủ nhật', en: 'Sunday' }, time: '11:00 AM – 5:00 PM' },
   ],
 };
 
