@@ -12,3 +12,7 @@ npm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+# claude code tooling + internal planning (không thuộc sản phẩm)
+.claude/
+plans/
+*.zip
