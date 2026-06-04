@@ -7,12 +7,12 @@ const items = [
   { key: 'sms', label: { vi: 'Nhắn tin (SMS)', en: 'Text us' }, href: `sms:${contact.phoneTel}`, cls: 'is-sms' },
 ];
 ---
-<div class="floating" aria-label="Liên hệ nhanh">
+<div class="floating" aria-label="Quick contact">
   {items.map((i) => (
     <a
       class:list={['fab', i.cls]}
       href={i.href}
-      aria-label={i.label.vi}
+      aria-label={i.label.en}
     >
       <span class="fab__icon" aria-hidden="true">
         {i.key === 'phone' && (

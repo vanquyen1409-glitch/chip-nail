@@ -14,14 +14,14 @@ import T from '../ui/T.astro';
     <div class="feedback__grid">
       {testimonials.map((t, i) => (
         <figure class="review" data-reveal data-reveal-delay={String((i % 4) + 1)}>
-          <div class="review__stars" aria-label={`${t.rating} trên 5 sao`}>
+          <div class="review__stars" aria-label={`${t.rating} out of 5 stars`}>
             {Array.from({ length: 5 }).map((_, s) => (
               <svg aria-hidden="true" class:list={['star', { 'is-on': s < t.rating }]} viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
             ))}
           </div>
           <blockquote class="review__quote">“<T vi={t.quote.vi} en={t.quote.en} />”</blockquote>
           <figcaption class="review__person">
-            <img class="review__avatar" src={t.avatar} alt={`Ảnh đại diện ${t.name.vi}`} width="56" height="56" loading="lazy" />
+            <span class="review__avatar" aria-hidden="true">{t.name.en.trim().slice(-1)}</span>
             <span>
               <strong class="review__name"><T vi={t.name.vi} en={t.name.en} /></strong>
               <span class="review__role"><T vi={t.role.vi} en={t.role.en} /></span>
@@ -60,7 +60,15 @@ import T from '../ui/T.astro';
     flex: 1;
   }
   .review__person { display: flex; align-items: center; gap: 0.8rem; margin-top: auto; }
-  .review__avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--brand-tint); }
+  .review__avatar {
+    width: 56px; height: 56px; flex: 0 0 56px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--brand-tint);
+    color: var(--brand);
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 1.3rem;
+  }
   .review__name { display: block; color: var(--text); }
   .review__role { font-size: 0.8rem; color: var(--text-muted); }
 

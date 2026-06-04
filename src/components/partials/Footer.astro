@@ -31,7 +31,7 @@ const socialLinks = [
       <span class="footer__name">{site.name}</span>
       <p class="footer__blurb"><T vi={`${site.tagline.vi}. ${site.description.vi}`} en={`${site.tagline.en}. ${site.description.en}`} /></p>
       {socialLinks.length > 0 && (
-        <ul class="footer__socials" aria-label="Mạng xã hội">
+        <ul class="footer__socials" aria-label="Social media">
           {socialLinks.map((s) => (
             <li>
               <a href={s.href} aria-label={s.label} target="_blank" rel="noopener">

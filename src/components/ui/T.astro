@@ -1,15 +1,14 @@
 ---
 /**
- * Văn bản song ngữ. Render cả 2 ngôn ngữ, CSS ẩn ngôn ngữ không chọn
- * (theo html[data-lang]) -> không nhấp nháy. Dùng: <T vi="..." en="..." />
- * br=true để đổi \n thành xuống dòng.
+ * Hiển thị văn bản (English-only). Giữ prop `vi` cho tương thích nơi gọi cũ
+ * nhưng không render. br=true để đổi \n thành xuống dòng.
  */
 interface Props {
-  vi: string;
+  vi?: string;
   en: string;
   br?: boolean;
 }
-const { vi, en, br = false } = Astro.props;
+const { en, br = false } = Astro.props;
 const fmt = (s: string) => (br ? s.replace(/\n/g, '<br>') : s);
 ---
-<span data-l="vi" set:html={fmt(vi)}></span><span data-l="en" set:html={fmt(en)}></span>
+<span set:html={fmt(en)}></span>

@@ -3,7 +3,7 @@ import { heroSlides } from '../../config/content';
 import Button from '../ui/Button.astro';
 import T from '../ui/T.astro';
 ---
-<section id="hero" class="hero" aria-label="Giới thiệu nổi bật" aria-roledescription="carousel">
+<section id="hero" class="hero" aria-label="Featured" aria-roledescription="carousel">
   <div class="hero__slides">
     {heroSlides.map((s, i) => (
       <article class:list={['hero__slide', { 'is-active': i === 0 }]} data-slide={i} aria-hidden={i !== 0}>
@@ -30,9 +30,9 @@ import T from '../ui/T.astro';
   </div>
 
   <!-- Điều khiển -->
-  <button class="hero__arrow hero__arrow--prev" data-prev aria-label="Slide trước">‹</button>
-  <button class="hero__arrow hero__arrow--next" data-next aria-label="Slide sau">›</button>
-  <div class="hero__dots" role="tablist" aria-label="Chọn slide">
+  <button class="hero__arrow hero__arrow--prev" data-prev aria-label="Previous slide">‹</button>
+  <button class="hero__arrow hero__arrow--next" data-next aria-label="Next slide">›</button>
+  <div class="hero__dots" role="tablist" aria-label="Choose slide">
     {heroSlides.map((_, i) => (
       <button class:list={['hero__dot', { 'is-active': i === 0 }]} data-dot={i} role="tab" aria-label={`Slide ${i + 1}`} aria-selected={i === 0}></button>
     ))}

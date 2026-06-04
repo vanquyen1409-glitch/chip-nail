@@ -1,14 +1,13 @@
 ---
 import { site, nav, contact } from '../../config/site';
 import ThemeToggle from './ThemeToggle.astro';
-import LangToggle from './LangToggle.astro';
 import Button from '../ui/Button.astro';
 import T from '../ui/T.astro';
 ---
 <header class="header" id="site-header">
   <div class="container header__inner">
     <!-- Logo dạng chữ (placeholder thương hiệu) -->
-    <a href="#hero" class="brand" aria-label={`${site.name} - trang chủ`}>
+    <a href="#hero" class="brand" aria-label={`${site.name} - home`}>
       <span class="brand__mark" aria-hidden="true">C</span>
       <span class="brand__text">
         <span class="brand__name">{site.name}</span>
@@ -17,7 +16,7 @@ import T from '../ui/T.astro';
     </a>
 
     <!-- Menu desktop -->
-    <nav class="nav-desktop" aria-label="Điều hướng chính">
+    <nav class="nav-desktop" aria-label="Main navigation">
       <ul>
         {nav.map((item) => (
           <li><a href={item.href} class="nav-link"><T vi={item.label.vi} en={item.label.en} /></a></li>
@@ -26,14 +25,13 @@ import T from '../ui/T.astro';
     </nav>
 
     <div class="header__actions">
-      <LangToggle />
       <ThemeToggle />
       <Button href="#contact" variant="primary" class="header__cta"><T vi="Đặt lịch" en="Book now" /></Button>
       <button
         id="menu-open"
         class="hamburger"
         type="button"
-        aria-label="Mở menu"
+        aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -47,9 +45,9 @@ import T from '../ui/T.astro';
     <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Menu">
       <div class="mobile-menu__top">
         <span class="brand__name">{site.name}</span>
-        <button id="menu-close" class="m-close" type="button" aria-label="Đóng menu">&#215;</button>
+        <button id="menu-close" class="m-close" type="button" aria-label="Close menu">&#215;</button>
       </div>
-      <nav aria-label="Điều hướng di động">
+      <nav aria-label="Mobile navigation">
         <ul>
           {nav.map((item) => (
             <li><a href={item.href} class="m-link" data-close><T vi={item.label.vi} en={item.label.en} /></a></li>
@@ -62,7 +60,7 @@ import T from '../ui/T.astro';
       </a>
       <Button href="#contact" variant="primary" size="lg" class="m-cta" data-close><T vi="Đặt lịch ngay" en="Book now" /></Button>
     </div>
-    <button class="mobile-menu__backdrop" id="menu-backdrop" aria-label="Đóng menu" tabindex="-1"></button>
+    <button class="mobile-menu__backdrop" id="menu-backdrop" aria-label="Close menu" tabindex="-1"></button>
   </div>
 </header>
 
