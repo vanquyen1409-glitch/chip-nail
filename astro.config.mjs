@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 // Đổi `site` sang domain thật của tiệm để canonical/OG chính xác.
 // (sitemap.xml đặt tĩnh trong public/ — nhớ đổi domain trong đó nếu đổi tên miền)
 export default defineConfig({
-  site: 'https://stately-moonbeam-946bef.netlify.app',
+  site: 'https://kaleidoscopic-sable-aa81ec.netlify.app',
   output: 'static',
   compressHTML: true,
   build: { inlineStylesheets: 'auto' },

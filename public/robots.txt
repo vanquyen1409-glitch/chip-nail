@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Đổi domain khi dùng tên miền riêng:
-Sitemap: https://stately-moonbeam-946bef.netlify.app/sitemap.xml
+Sitemap: https://kaleidoscopic-sable-aa81ec.netlify.app/sitemap.xml
