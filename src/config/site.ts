@@ -13,7 +13,7 @@ export const site = {
     vi: 'Tiệm nail hiện đại — thiết kế móng thời thượng, không gian thư giãn, đội ngũ tận tâm. Đặt lịch ngay để chăm sóc đôi tay của bạn.',
     en: 'Modern nail salon — trendy nail designs, a relaxing space and a dedicated team. Book today to pamper your hands.',
   },
-  url: 'https://kaleidoscopic-sable-aa81ec.netlify.app',
+  url: 'https://chipnail.netlify.app',
   year: new Date().getFullYear(),
 };
 
