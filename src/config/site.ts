@@ -44,7 +44,7 @@ export const socials = {
  * (vd 'https://book.squareup.com/...'). Để '#contact' nếu chưa có -> nút sẽ
  * cuộn xuống phần Liên hệ. Khi có link thật, mọi nút "Book now" tự mở trang đặt lịch.
  */
-export const bookingUrl = '#contact';
+export const bookingUrl = 'https://calendly.com/vanquyen1409/30min';
 
 export const nav = [
   { label: { vi: 'Trang chủ', en: 'Home' }, href: '#hero' },
