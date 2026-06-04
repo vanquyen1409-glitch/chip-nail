@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Đổi domain khi dùng tên miền riêng:
+Sitemap: https://stately-moonbeam-946bef.netlify.app/sitemap.xml

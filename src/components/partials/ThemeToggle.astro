@@ -1,0 +1,81 @@
+---
+// Nút chuyển Tối/Sáng. Lưu lựa chọn vào localStorage.
+---
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  type="button"
+  aria-label="Chuyển chế độ sáng/tối"
+  title="Chuyển chế độ sáng/tối"
+>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.5" />
+    <g stroke-width="2" stroke-linecap="round">
+      <line x1="12" y1="2.5" x2="12" y2="5" />
+      <line x1="12" y1="19" x2="12" y2="21.5" />
+      <line x1="2.5" y1="12" x2="5" y2="12" />
+      <line x1="19" y1="12" x2="21.5" y2="12" />
+      <line x1="5.2" y1="5.2" x2="6.9" y2="6.9" />
+      <line x1="17.1" y1="17.1" x2="18.8" y2="18.8" />
+      <line x1="18.8" y1="5.2" x2="17.1" y2="6.9" />
+      <line x1="6.9" y1="17.1" x2="5.2" y2="18.8" />
+    </g>
+  </svg>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8Z" />
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-elev-2);
+    color: var(--text);
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  }
+  .theme-toggle:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    transform: rotate(-12deg);
+  }
+  .icon {
+    grid-area: 1 / 1;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .icon-sun { fill: currentColor; stroke: none; }
+  /* Dark mode hiện mặt trăng (để bấm sang sáng); Light hiện mặt trời */
+  :global([data-theme='dark']) .icon-sun { opacity: 0; transform: scale(0.4) rotate(-90deg); }
+  :global([data-theme='dark']) .icon-moon { opacity: 1; transform: none; }
+  :global([data-theme='light']) .icon-sun { opacity: 1; transform: none; }
+  :global([data-theme='light']) .icon-moon { opacity: 0; transform: scale(0.4) rotate(90deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle:hover { transform: none; }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  let themeTimer: number | undefined;
+  btn?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    // bật transition màu ngắn trên toàn trang trong lúc chuyển
+    root.classList.add('theme-switching');
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    clearTimeout(themeTimer);
+    themeTimer = window.setTimeout(() => root.classList.remove('theme-switching'), 450);
+  });
+</script>

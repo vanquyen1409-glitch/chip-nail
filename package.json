@@ -1,0 +1,16 @@
+{
+  "name": "nail-salon-template",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "White-label nail salon landing page template (Astro). Dark-default theme, responsive, scroll animations.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "check": "astro check",
+    "compile": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  }
+}

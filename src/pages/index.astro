@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/partials/Header.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Services from '../components/sections/Services.astro';
+import Feedback from '../components/sections/Feedback.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import Footer from '../components/partials/Footer.astro';
+import FloatingContact from '../components/partials/FloatingContact.astro';
+---
+<BaseLayout>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Feedback />
+    <Gallery />
+  </main>
+  <Footer />
+  <FloatingContact />
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+import { contact } from '../../config/site';
+import T from '../ui/T.astro';
+
+const items = [
+  { key: 'phone', label: { vi: `Gọi ${contact.phoneLabel}`, en: `Call ${contact.phoneLabel}` }, href: `tel:${contact.phoneTel}`, cls: 'is-phone' },
+  { key: 'sms', label: { vi: 'Nhắn tin (SMS)', en: 'Text us' }, href: `sms:${contact.phoneTel}`, cls: 'is-sms' },
+];
+---
+<div class="floating" aria-label="Liên hệ nhanh">
+  {items.map((i) => (
+    <a
+      class:list={['fab', i.cls]}
+      href={i.href}
+      aria-label={i.label.vi}
+    >
+      <span class="fab__icon" aria-hidden="true">
+        {i.key === 'phone' && (
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.37 2.3.57 3.5.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.57 3.5a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
+        )}
+        {i.key === 'sms' && (
+          <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm4 6h8v-1.5H8V10zm0 3h6v-1.5H8V13z"/></svg>
+        )}
+      </span>
+      <span class="fab__label"><T vi={i.label.vi} en={i.label.en} /></span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .floating {
+    position: fixed;
+    right: clamp(0.8rem, 2vw, 1.4rem);
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 150;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .fab {
+    display: flex; align-items: center; gap: 0;
+    height: 52px;
+    padding: 0;
+    border-radius: var(--radius-pill);
+    background: var(--brand);
+    color: #fff;
+    box-shadow: 0 8px 22px -8px hsl(252 40% 8% / 0.55);
+    overflow: hidden;
+    transition: padding var(--transition), background var(--transition), transform var(--transition);
+    animation: fabin 0.5s ease-out backwards;
+  }
+  .floating .fab:nth-child(1) { animation-delay: 0.25s; }
+  .floating .fab:nth-child(2) { animation-delay: 0.33s; }
+  .floating .fab:nth-child(3) { animation-delay: 0.41s; }
+  @keyframes fabin { from { opacity: 0; transform: translateY(14px) scale(0.9); } to { opacity: 1; transform: none; } }
+  .fab__icon {
+    flex: 0 0 52px;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+  }
+  .fab__icon svg { width: 22px; height: 22px; fill: #fff; }
+  .fab__z { font-size: 1.25rem; font-weight: 800; color: #fff; font-family: var(--font-sans); }
+  .fab__label {
+    max-width: 0;
+    white-space: nowrap;
+    font-size: 0.9rem; font-weight: 600;
+    opacity: 0;
+    transition: max-width var(--transition), opacity var(--transition), padding var(--transition);
+  }
+  .fab:hover { color: #fff; transform: translateY(-2px); }
+  /* mở rộng nhãn khi hover trên thiết bị có chuột */
+  @media (hover: hover) {
+    .fab:hover .fab__label { max-width: 180px; opacity: 1; padding-right: 1.1rem; }
+  }
+  .fab.is-sms { background: var(--brand-strong); }
+
+  /* Pulse trên nút gọi */
+  .fab.is-phone { position: relative; }
+  .fab.is-phone::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 var(--brand);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 0.6); }
+    70% { box-shadow: 0 0 0 14px hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 0); }
+    100% { box-shadow: 0 0 0 0 hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fab { animation: none; }
+    .fab.is-phone::before { animation: none; }
+    .fab:hover { transform: none; }
+  }
+</style>

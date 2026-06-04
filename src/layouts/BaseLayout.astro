@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** ảnh OG; mặc định dùng banner */
+  image?: string;
+}
+
+const {
+  title = `${site.name} — ${site.tagline.vi} | ${site.tagline.en}`,
+  description = `${site.description.vi} ${site.description.en}`,
+  image = '/images/hero-1.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+---
+
+<!doctype html>
+<html lang="vi" data-theme="dark" data-lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Webfont hỗ trợ đầy đủ tiếng Việt (tránh lỗi dấu rời trên Georgia) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    />
+
+    <!-- ƯU TIÊN: đặt theme trước khi paint để tránh nhấp nháy (FOUC) -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        try {
+          const saved = localStorage.getItem('theme');
+          root.dataset.theme = saved === 'light' || saved === 'dark' ? saved : 'dark';
+        } catch (e) { root.dataset.theme = 'dark'; }
+        try {
+          const lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
+          root.dataset.lang = lang;
+          root.setAttribute('lang', lang);
+        } catch (e) { root.dataset.lang = 'vi'; }
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#121117" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site ?? site.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { initReveal } from '../scripts/reveal';
+      initReveal();
+    </script>
+  </body>
+</html>

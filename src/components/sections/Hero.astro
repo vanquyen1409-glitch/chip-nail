@@ -1,0 +1,180 @@
+---
+import { heroSlides } from '../../config/content';
+import Button from '../ui/Button.astro';
+import T from '../ui/T.astro';
+---
+<section id="hero" class="hero" aria-label="Giới thiệu nổi bật" aria-roledescription="carousel">
+  <div class="hero__slides">
+    {heroSlides.map((s, i) => (
+      <article class:list={['hero__slide', { 'is-active': i === 0 }]} data-slide={i} aria-hidden={i !== 0}>
+        <img
+          src={s.image}
+          alt={s.alt.vi}
+          width="1600"
+          height="800"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+        />
+        <div class="hero__overlay"></div>
+        <div class="container hero__content">
+          <span class="eyebrow hero__eyebrow"><T vi={s.eyebrow.vi} en={s.eyebrow.en} /></span>
+          <h1 class="hero__title"><T vi={s.title.vi} en={s.title.en} br /></h1>
+          <p class="hero__desc"><T vi={s.desc.vi} en={s.desc.en} /></p>
+          <div class="hero__cta">
+            <Button href="#contact" variant="primary" size="lg"><T vi="Đặt lịch ngay" en="Book now" /></Button>
+            <Button href="#about" variant="outline" size="lg"><T vi="Xem chi tiết" en="Learn more" /></Button>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Điều khiển -->
+  <button class="hero__arrow hero__arrow--prev" data-prev aria-label="Slide trước">‹</button>
+  <button class="hero__arrow hero__arrow--next" data-next aria-label="Slide sau">›</button>
+  <div class="hero__dots" role="tablist" aria-label="Chọn slide">
+    {heroSlides.map((_, i) => (
+      <button class:list={['hero__dot', { 'is-active': i === 0 }]} data-dot={i} role="tab" aria-label={`Slide ${i + 1}`} aria-selected={i === 0}></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; height: clamp(560px, 88svh, 900px); overflow: hidden; }
+  .hero__slides { position: absolute; inset: 0; }
+  .hero__slide {
+    position: absolute; inset: 0;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.9s ease;
+  }
+  .hero__slide.is-active { opacity: 1; visibility: visible; }
+  .hero__slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.02);
+  }
+  /* Ken Burns: chỉ ảnh của slide đang hiển zoom nhẹ, đổi slide thì reset */
+  .hero__slide.is-active img {
+    animation: kenburns 8s ease-out forwards;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.02); }
+    to { transform: scale(1.12); }
+  }
+  .hero__overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, hsl(252 24% 4% / 0.82) 0%, hsl(252 24% 4% / 0.45) 45%, hsl(252 24% 4% / 0.15) 100%),
+      linear-gradient(to top, hsl(252 24% 4% / 0.6), transparent 50%);
+  }
+  [data-theme='light'] .hero__overlay {
+    background:
+      linear-gradient(to right, hsl(252 20% 6% / 0.7) 0%, hsl(252 20% 6% / 0.35) 50%, transparent 100%),
+      linear-gradient(to top, hsl(252 20% 6% / 0.45), transparent 50%);
+  }
+
+  .hero__content {
+    position: relative;
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: flex-start;
+    max-width: var(--maxw);
+    color: #fff;
+  }
+  .hero__eyebrow { color: var(--brand-soft); }
+  .hero__title {
+    font-size: var(--step-4);
+    color: #fff;
+    margin: 0.6rem 0 1rem;
+    max-width: 16ch;
+    text-shadow: 0 2px 30px hsl(252 40% 3% / 0.55);
+  }
+  .hero__desc { color: hsl(0 0% 100% / 0.9); max-width: 46ch; font-size: var(--step-1); }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
+
+  /* Hiệu ứng chữ khi slide active */
+  .hero__eyebrow, .hero__title, .hero__desc, .hero__cta {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero__slide.is-active .hero__eyebrow { opacity: 1; transform: none; transition-delay: 0.15s; }
+  .hero__slide.is-active .hero__title { opacity: 1; transform: none; transition-delay: 0.28s; }
+  .hero__slide.is-active .hero__desc { opacity: 1; transform: none; transition-delay: 0.40s; }
+  .hero__slide.is-active .hero__cta { opacity: 1; transform: none; transition-delay: 0.52s; }
+
+  /* Arrows */
+  .hero__arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 3;
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    font-size: 1.8rem; line-height: 1;
+    color: #fff;
+    background: hsl(0 0% 100% / 0.12);
+    border: 1px solid hsl(0 0% 100% / 0.3);
+    border-radius: 50%;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .hero__arrow:hover { background: var(--brand); border-color: var(--brand); }
+  .hero__arrow--prev { left: clamp(0.6rem, 2vw, 1.5rem); }
+  .hero__arrow--next { right: clamp(0.6rem, 2vw, 1.5rem); }
+
+  /* Dots */
+  .hero__dots {
+    position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 3; display: flex; gap: 0.6rem;
+  }
+  .hero__dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 0; cursor: pointer;
+    background: hsl(0 0% 100% / 0.45);
+    transition: width var(--transition), background var(--transition);
+  }
+  .hero__dot.is-active { width: 30px; border-radius: 6px; background: var(--brand); }
+
+  @media (max-width: 600px) {
+    .hero__arrow { display: none; }
+    .hero__desc { font-size: var(--step-0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide { transition: none; }
+    .hero__slide img, .hero__slide.is-active img { animation: none; transform: none; }
+    .hero__eyebrow, .hero__title, .hero__desc, .hero__cta { transition: none; opacity: 1; transform: none; }
+  }
+</style>
+
+<script>
+  const root = document.querySelector('.hero');
+  if (root) {
+    const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+    const dots = [...root.querySelectorAll<HTMLElement>('[data-dot]')];
+    let i = 0;
+    let timer: number | undefined;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const go = (n: number) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => {
+        s.classList.toggle('is-active', k === i);
+        s.setAttribute('aria-hidden', String(k !== i));
+      });
+      dots.forEach((d, k) => {
+        d.classList.toggle('is-active', k === i);
+        d.setAttribute('aria-selected', String(k === i));
+      });
+    };
+    const next = () => go(i + 1);
+    const start = () => { if (!reduce) timer = window.setInterval(next, 5500); };
+    const stop = () => { if (timer) clearInterval(timer); };
+    const restart = () => { stop(); start(); };
+
+    root.querySelector('[data-next]')?.addEventListener('click', () => { next(); restart(); });
+    root.querySelector('[data-prev]')?.addEventListener('click', () => { go(i - 1); restart(); });
+    dots.forEach((d, k) => d.addEventListener('click', () => { go(k); restart(); }));
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    start();
+  }
+</script>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import T from '../components/ui/T.astro';
+---
+<BaseLayout title="404 — Không tìm thấy trang / Page not found">
+  <main class="nf container">
+    <p class="eyebrow"><T vi="Lỗi 404" en="Error 404" /></p>
+    <h1><T vi="Trang không tồn tại" en="Page not found" /></h1>
+    <p><T vi="Có vẻ liên kết bạn truy cập đã thay đổi hoặc không còn nữa." en="The link you followed may have changed or no longer exists." /></p>
+    <Button href="/" variant="primary" size="lg"><T vi="Về trang chủ" en="Back to home" /></Button>
+  </main>
+</BaseLayout>
+
+<style>
+  .nf {
+    min-height: 70svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 1rem;
+  }
+  .nf h1 { font-size: var(--step-4); }
+</style>

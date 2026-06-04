@@ -1,0 +1,33 @@
+---
+import T from './T.astro';
+interface Bi { vi: string; en: string; }
+interface Props {
+  eyebrow?: Bi;
+  title: Bi;
+  subtitle?: Bi;
+  align?: 'center' | 'left';
+}
+const { eyebrow, title, subtitle, align = 'center' } = Astro.props;
+---
+<div class:list={['section-title', `is-${align}`]} data-reveal>
+  {eyebrow && <span class="eyebrow"><T vi={eyebrow.vi} en={eyebrow.en} /></span>}
+  <h2><T vi={title.vi} en={title.en} /></h2>
+  {subtitle && <p class="section-title__sub"><T vi={subtitle.vi} en={subtitle.en} /></p>}
+</div>
+
+<style>
+  .section-title { max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .is-center { text-align: center; margin-inline: auto; }
+  .is-left { text-align: left; }
+  .section-title h2 { margin-top: 0.5rem; }
+  .section-title h2::after {
+    content: '';
+    display: block;
+    width: 56px; height: 3px;
+    margin-top: 0.8rem;
+    border-radius: 3px;
+    background: var(--brand);
+  }
+  .is-center h2::after { margin-inline: auto; }
+  .section-title__sub { margin-top: 0.9rem; font-size: var(--step-0); }
+</style>

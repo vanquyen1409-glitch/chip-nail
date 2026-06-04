@@ -1,0 +1,60 @@
+/* ============================================================
+   DESIGN TOKENS — đổi --brand-h/s/l để rebrand toàn site.
+   Dark = mặc định (:root). Light = [data-theme="light"].
+   Tông HIỆN ĐẠI: charcoal trung tính mát + accent orchid/magenta.
+   ============================================================ */
+:root {
+  /* ---- Thương hiệu: xanh ngọc (teal) hiện đại. Đổi 3 số dưới là đổi cả site ---- */
+  --brand-h: 176;      /* hue   (0-360) */
+  --brand-s: 60%;      /* sat   */
+  --brand-l: 38%;      /* light */
+  --brand: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
+  --brand-soft: hsl(var(--brand-h) var(--brand-s) 62%);
+  --brand-strong: hsl(var(--brand-h) calc(var(--brand-s) + 8%) calc(var(--brand-l) - 8%));
+  --brand-tint: hsl(var(--brand-h) 45% 42% / 0.16);
+
+  /* ---- Dark theme (default) — charcoal trung tính, hơi mát ---- */
+  --bg: hsl(252 12% 7%);
+  --bg-elev: hsl(252 11% 10%);
+  --bg-elev-2: hsl(252 9% 14%);
+  --surface: hsl(252 10% 12%);
+  --text: hsl(250 16% 95%);
+  --text-muted: hsl(250 8% 66%);
+  --border: hsl(252 10% 21%);
+  --shadow: 0 14px 36px -16px hsl(252 40% 3% / 0.75);
+  --overlay: hsl(252 20% 4% / 0.62);
+
+  /* ---- Typography ---- */
+  --font-sans: 'Be Vietnam Pro', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Playfair Display', 'Be Vietnam Pro', 'Segoe UI', system-ui, Georgia, serif;
+
+  /* ---- Fluid scale ---- */
+  --step--1: clamp(0.83rem, 0.78rem + 0.2vw, 0.94rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2.1rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3.2rem);
+  --step-4: clamp(2.6rem, 2rem + 3vw, 4.5rem);
+
+  /* ---- Spacing / layout ---- */
+  --space-section: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --maxw: 1200px;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --transition: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='light'] {
+  --bg: hsl(250 30% 98%);
+  --bg-elev: hsl(250 30% 99.5%);
+  --bg-elev-2: hsl(250 22% 96%);
+  --surface: hsl(0 0% 100%);
+  --text: hsl(252 18% 13%);
+  --text-muted: hsl(250 8% 40%);
+  --border: hsl(250 18% 89%);
+  --shadow: 0 14px 34px -18px hsl(252 40% 30% / 0.26);
+  --overlay: hsl(252 20% 12% / 0.45);
+  --brand-l: 34%;
+}

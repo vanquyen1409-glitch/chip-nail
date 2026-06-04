@@ -1,0 +1,51 @@
+---
+// Nút chuyển ngôn ngữ VI / EN. Lưu localStorage 'lang'.
+---
+<div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+  <button type="button" data-lang-set="vi" aria-label="Tiếng Việt">VI</button>
+  <button type="button" data-lang-set="en" aria-label="English">EN</button>
+</div>
+
+<style>
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 3px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-elev-2);
+  }
+  .lang button {
+    border: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 0 0.6rem;
+    height: 100%;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+  }
+  .lang button:hover { color: var(--text); }
+  html[data-lang='vi'] .lang [data-lang-set='vi'],
+  html[data-lang='en'] .lang [data-lang-set='en'] {
+    background: var(--brand);
+    color: #fff;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  document.querySelectorAll<HTMLElement>('[data-lang-set]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const l = b.dataset.langSet === 'en' ? 'en' : 'vi';
+      root.dataset.lang = l;
+      root.setAttribute('lang', l);
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    });
+  });
+</script>
