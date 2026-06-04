@@ -20,9 +20,9 @@ export const site = {
 export const contact = {
   phoneLabel: '(402) 499-2303',
   phoneTel: '+14024992303',
-  email: '[email@tenmien.vn]',
-  address: '[Số nhà, Đường, Phường, Quận, Thành phố]',
-  mapUrl: '#',
+  email: 'dhbt2011@gmail.com',
+  address: '831 Lamont Drive, Lincoln, NE',
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=831+Lamont+Drive+Lincoln+NE',
   hours: [
     { days: { vi: 'Thứ 2 – Thứ 6', en: 'Mon – Fri' }, time: '09:00 – 20:00' },
     { days: { vi: 'Thứ 7 – Chủ nhật', en: 'Sat – Sun' }, time: '08:30 – 21:00' },
@@ -33,7 +33,7 @@ export const socials = {
   // Để '#' nghĩa là ẩn. Điền link thật để hiện ở footer.
   zalo: '#',
   messenger: '#',
-  facebook: '#',
+  facebook: 'https://www.facebook.com/anghoangbaotran.515612',
   instagram: '#',
   tiktok: '#',
 };
